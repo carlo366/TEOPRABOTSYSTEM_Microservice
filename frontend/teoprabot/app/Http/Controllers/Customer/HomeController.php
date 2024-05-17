@@ -65,7 +65,7 @@ class HomeController extends Controller
 
     $client = new Client();
 
-        $urlProduct = "http://localhost:8081/api/products/";
+        $urlProduct = "http://192.168.20.71:8081/api/products/";
         $responseProduct = $client->request('GET', $urlProduct);
         $content = $responseProduct->getBody()->getContents();
         $contentArray = json_decode($content, true);
@@ -192,5 +192,68 @@ public function AddProductToCart(Request $request)
         return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
     }
 }
+    public function jual(){
+        $client = new Client();
+        $url = "http://localhost:9097/api/kondisi/";
+        $response = $client->request('GET', $url);
+        $content = $response->getBody()->getContents();
+        $contentArray = json_decode($content, true);
+        $data = $contentArray['data'];
+
+        $url = "http://192.168.20.71:9090/api/categories/";
+        $response = $client->request('GET', $url);
+        $content = $response->getBody()->getContents();
+        $contentArray = json_decode($content, true);
+        $categories = $contentArray['data'];
+
+
+
+        return view('costumers.jual',['data' => $data, 'categories' => $categories]);
+    }
+
+
+    public function tambahjual(Request $request){
+        $client = new \GuzzleHttp\Client();
+        $url = "http://localhost:8089/api/juals";
+
+        $user_id = Auth::id();
+        $image = $request->file('image');
+
+
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $image->move(public_path('uploads/jual'), $imageName);
+
+
+        $parameters = [
+            'name' => $request->name,
+            'description' => $request->description,
+            'category_id' => (int)$request->category_id,
+            'saran_price' => (int)$request->saran_price,
+            'kondisi_id' => (int)$request->kondisi_id,
+            'user_id' => (int) $user_id,
+            'image' => $imageName
+        ];
+
+
+
+        try {
+            $response = $client->request('POST', $url, [
+                'headers' => ['Content-Type' => 'application/json'],
+                'body' => json_encode($parameters)
+            ]);
+
+            $content = $response->getBody()->getContents();
+            $contentArray = json_decode($content, true);
+
+
+            if (isset($contentArray['status']) && $contentArray['status'] == false) {
+                return redirect()->back()->with('error', $contentArray['message']);
+            }
+
+            return redirect()->route('jual')->with('success', 'Product added successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        }
+    }
 }
 

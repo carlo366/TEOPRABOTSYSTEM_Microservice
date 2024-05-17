@@ -24,7 +24,7 @@ class ProductsController extends Controller
     public function __construct()
     {
         // Tentukan URL API Go CRUD
-        $this->apiUrl = 'http://localhost:9090/api/categories'; // Ganti dengan URL API Go Anda
+        $this->apiUrl = 'http://192.168.20.71:9090/api/categories'; // Ganti dengan URL API Go Anda
 
         // Initialize $this->messages with an array of validation messages
         $this->messages = [
@@ -49,7 +49,7 @@ class ProductsController extends Controller
     public function slider(){
         $client = new Client();
 
-        $urlislider = "http://localhost:9092/api/slider/";
+        $urlislider = "http://192.168.20.71:9092/api/slider/";
         $responseislider = $client->request('GET', $urlislider);
         $content = $responseislider->getBody()->getContents();
         $contentArray = json_decode($content, true);
@@ -62,14 +62,14 @@ class ProductsController extends Controller
     {
         $client = new Client();
 
-        $url = "http://localhost:9090/api/categories/";
+        $url = "http://192.168.20.71:9090/api/categories/";
         $response = $client->request('GET', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);
         $data = $contentArray['data'];
 
         // Panggil API produk
-        $urlProduct = "http://localhost:8081/api/products/";
+        $urlProduct = "http://192.168.20.71:8081/api/products/";
         $responseProduct = $client->get($urlProduct);
         $products = json_decode($responseProduct->getBody()->getContents(), true);
 
@@ -81,7 +81,7 @@ class ProductsController extends Controller
     }
     public function addSlider(Request $request) {
         $client = new \GuzzleHttp\Client();
-        $url = "http://localhost:9092/api/slider";
+        $url = "http://192.168.20.71:9092/api/slider";
 
         try {
             $response = $client->request('POST', $url, [
@@ -113,7 +113,7 @@ class ProductsController extends Controller
 
     public function editSlider(string $id){
         $client = new Client();
-        $url = "http://localhost:9092/api/slider/$id";
+        $url = "http://192.168.20.71:9092/api/slider/$id";
         $response = $client->request('GET', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);
@@ -131,7 +131,7 @@ class ProductsController extends Controller
 
     public function Deleteslider($id){
         $client = new Client();
-        $url = "http://localhost:9092/api/slider/$id";
+        $url = "http://192.168.20.71:9092/api/slider/$id";
         try {
             $response = $client->request('DELETE', $url);
             $content = $response->getBody()->getContents();
@@ -147,14 +147,14 @@ class ProductsController extends Controller
     $client = new Client();
 
 
-    $url = "http://localhost:9090/api/categories/";
+    $url = "http://192.168.20.71:9090/api/categories/";
     $response = $client->request('GET', $url);
     $content = $response->getBody()->getContents();
     $contentArray = json_decode($content, true);
     $categories = $contentArray['data'];
 
 
-    $url = "http://localhost:8081/api/products/$id";
+    $url = "http://192.168.20.71:8081/api/products/$id";
     $response = $client->request('GET', $url);
     $content = $response->getBody()->getContents();
     $contentArray = json_decode($content, true);
@@ -169,14 +169,14 @@ class ProductsController extends Controller
     $client = new Client();
 
     // Fetch product details
-    $url = "http://localhost:8081/api/products/$id";
+    $url = "http://192.168.20.71:8081/api/products/$id";
     $response = $client->request('GET', $url);
     $content = $response->getBody()->getContents();
     $contentArray = json_decode($content, true);
     $product = $contentArray['data'];
 
     // Fetch all images
-    $url = "http://localhost:9091/api/imagep/";
+    $url = "http://192.168.20.71:9091/api/imagep/";
     $response = $client->request('GET', $url);
     $content = $response->getBody()->getContents();
     $contentArray = json_decode($content, true);
@@ -197,7 +197,7 @@ class ProductsController extends Controller
 
   public function UpdateProduk(Request $request, string $id){
     $client = new Client();
-    $url = "http://localhost:8081/api/products/{$id}"; // Perhatikan penempatan ID di URL
+    $url = "http://192.168.20.71:8081/api/products/{$id}"; // Perhatikan penempatan ID di URL
 
     $parameters = [
         'name' => $request->name,
@@ -249,7 +249,7 @@ class ProductsController extends Controller
           ];
 
           $client = new Client();
-          $url = "http://localhost:9091/api/imagep/";
+          $url = "http://192.168.20.71:9091/api/imagep/";
 
           $response = $client->request('POST', $url, [
               'headers' => ['Content-Type' => 'application/json'],
@@ -277,7 +277,7 @@ class ProductsController extends Controller
   public function StoreProduct(Request $request)
 {
     $client = new \GuzzleHttp\Client();
-    $url = "http://localhost:8081/api/products/";
+    $url = "http://192.168.20.71:8081/api/products/";
 
     $parameters = [
         'name' => $request->name,
@@ -311,7 +311,7 @@ class ProductsController extends Controller
 
 public function DeleteProduk($id){
     $client = new Client();
-    $url = "http://localhost:8081/api/products/$id";
+    $url = "http://192.168.20.71:8081/api/products/$id";
 
     try {
         $response = $client->request('DELETE', $url);

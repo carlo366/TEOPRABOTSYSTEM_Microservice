@@ -2,6 +2,7 @@ a<?php
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\galery;
+use App\Http\Controllers\Admin\Kondisi;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\CartsController;
 use App\Http\Controllers\Customer\CartsController as CustomerCartsController;
@@ -35,6 +36,8 @@ use Illuminate\Support\Facades\Route;
         Route::get('/produk-detil/{id}', 'ProdukDetil')->name('produkdetail');
         Route::post('/add-product-to-cart','AddProductToCart')->name('addproducttocart');
         Route::post('/addslider','addslider')->name('addslider');
+        Route::post('/jual', 'tambahjual')->name('tambahjual');
+        Route::get('/jual', 'jual')->name('jual');
     });
     Route::controller(CustomerCartsController::class)->group(function(){
         Route::get('/keranjang','keranjang')->name('keranjang');
@@ -91,6 +94,16 @@ Route::controller(ControllersGalery::class)->group(function(){
         Route::get('admin/delete-slider/{id}','Deleteslider')->name('deleteslider');
         Route::get('admin/edit-slider/{id}','EditSlider')->name('editSlider');
         Route::post('admin/update-slider/{id}','UpdateSlider')->name('updateSlider');
+
+
+    });
+
+    Route::controller(Kondisi::class)->group(function(){
+        Route::get('admin/semua-kondisi','indexkondisi')->name('adminallkondisi');
+        Route::post('admin/store-kondisi','Storekondisi')->name('storekondisi');
+        Route::get('admin/delete-kondisi/{id}','Deletekondisi')->name('deletekondisi');
+        Route::get('admin/edit-kondisi/{id}','Editkondisi')->name('editkondisi');
+        Route::post('admin/update-kondisi/{id}','Updatekondisi')->name('updatekondisi');
 
 
     });

@@ -65,7 +65,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="color">Warna:</label>
-                                <input type="text" class="form-control" id="color" value="{{$data['color']}}" name="color" placeholder="Misal: Putih, Merah, dll">
+                                <input type="text" class="form-control" id="color" value="{{$data['Color']}}" name="color" placeholder="Misal: Putih, Merah, dll">
                             </div>
                         </div>
                     </div>

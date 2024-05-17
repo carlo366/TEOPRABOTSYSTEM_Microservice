@@ -296,8 +296,7 @@
                             <li><a href=""><i class="bi bi-bell text-light"></i> <span>1</span></a></li>
                             <li><a href="{{route('keranjang')}}"><i class="bi bi-cart text-light"></i> <span>3</span></a></li>
                         </ul>
-                        <div class="header__cart__price"><button class="btn btn-success jualbeli" style="padding:0.01em 3em;">+ <span class="text-dark">Jual</span></button></div>
-                        <div class="header__cart__price"><button class="btn btn-success jualbeli" style="padding:0.01em 2em;margin:0.5em 0em;">+ <span  class="text-dark">Perbaiki</span></button></div>
+                        <div class="header__cart__price"><a href="{{route('jual')}}" class="btn btn-success jualbeli" style="padding:0.01em 3em;">+ <span class="text-dark">Jual</span></a></div>
 
                     </div>
                 </div>

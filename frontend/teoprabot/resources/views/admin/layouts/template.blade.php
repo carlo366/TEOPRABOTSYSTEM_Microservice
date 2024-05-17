@@ -96,6 +96,18 @@
                 </li>
 
 
+                <li class='sidebar-title'>kondisi</li>
+
+
+                <li class="sidebar-item  ">
+
+                    <a href="{{route('adminallkondisi')}}" class='sidebar-link'>
+                        <span>Semua kondisi</span>
+                    </a>
+                </li>
+
+
+
 
 
 
